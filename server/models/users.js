@@ -38,6 +38,7 @@ const genAUthToken = (user => {
         email: user.email,
         isAdmin: user.isAdmin
     },
+    
     secretKey
     );
     return token
