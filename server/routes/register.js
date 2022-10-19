@@ -32,6 +32,7 @@ let user = new User({
     isAdmin: req.body.isAdmin,
     password: req.body.password
 });
+
 // hash password(so no one could access the info)
 const salt = await bcrypt.genSalt(10)
 user.password = await bcrypt.hash(user.password, salt)
