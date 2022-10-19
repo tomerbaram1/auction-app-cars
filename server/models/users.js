@@ -16,7 +16,16 @@ const UserSchema = new mongoose.Schema({
     required: true,
     minlength: 8,
     maxlength:1024,
- }})
+ },
+isAdmin:{type: Boolean, default: false},
+
+  bids: [
+    {
+      type: mongoose.Types.ObjectId,
+      ref: 'product',
+    },
+  ]
+})
 
 
 const User = mongoose.model('user', UserSchema);
@@ -26,7 +35,8 @@ const genAUthToken = (user => {
     {
         _id: user._id,
         name: user.name,
-        email: user.email
+        email: user.email,
+        isAdmin: user.isAdmin
     },
     secretKey
     );

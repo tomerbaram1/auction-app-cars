@@ -1,28 +1,158 @@
 const express = require('express')
-const { Product } = require('../models/products')
+const {isAdmin} = require('../middleware/auth')
+const {
+    getProducts,
+    getProduct,
+    createProduct,
+    deleteProduct,
+    updateProduct,
+    deleteAllProducts,
+    updateProductBid
+} = require('../controllers/productController')
+
 const router = express.Router()
+    
+    // GET all 
+router.get('/', getProducts)
 
-// Get all Method
-router.get("/",async(req,res)=>{
-	const products = await Product.find({})
-	return res.send(products)
-})
+// GET a single 
+router.get('/:id', getProduct)
 
-router.post("/",async(req,res))
-const { title, description, startprice } = req.body
-const product = await Product.findOne({ title })
-if (!product) return res.status(400).send("Invalid Item");
+// POST a new 
+router.post('/', createProduct)
 
-res.json({
-    _id: product.id,
-    title: product.title,
-    description: product.description,
-	startprice: product.startprice
+// DELETE 
+router.delete('/:id', deleteProduct)
+// DELETE 
+// router.delete('/', deleteAllProducts)
 
-  })
+// // UPDATE 
+router.patch('/:id', updateProduct)
 
 
 
 
 
-module.exports = router;
+
+
+
+
+
+// UPDATE a bid
+router.patch('/bid/:id', updateProductBid)
+
+
+
+
+// router.patch('/bid', updateProductBid)
+
+ module.exports = router;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// ==================
+
+// // CREATE
+
+// router.post("/" ,async (req,res)=>{
+//       const newProduct = new Product (req.body)
+//       try{
+//             const savedProduct = await newProduct.save()
+//             res.status(200).json(savedProduct)
+//         }catch(err){
+//               res.status(500).json(err)
+//           }
+//       })  
+      
+//       //UPDATE
+//       router.put("/:id" , async (req, res) => {
+        
+//             try {
+//                 const updatedProuduct = await Product.findByIdAndUpdate(
+//                     req.params.id,
+//                     {
+//                         $set: req.body,
+//                       },
+//                       { new: true }
+//                     );
+//                     res.status(200).json(updatedProuduct);
+//                   } catch (err) {
+//       res.status(500).json(err);
+//     }
+//   });
+
+//   //DELETE
+
+//   router.delete("/:id" , async (req, res)=>{
+//       try{
+//           await Product.findByIdAndDelete(req.params.id)
+//           res.status(200).json("Product has been deleted")
+//         }catch(err){
+//             res.status(500).json(err)
+//           }
+//         })
+      
+//         // GET
+      
+//         router.get("/find/:id", async (req, res)=>{
+//             try{
+//                 const Product = await Product.findById(req.params.id)
+//                 res.status(200).json(Product)
+//               }catch(err){
+//                   res.status(500).json(err)
+//                 }
+//               })
+            
+//               //GET ALL Products
+            
+//               router.get("/", async (req, res)=>{
+//                   const qNEW = req.query.new
+//                   const qCategory = req.query.category
+//                   try{
+//                         let products;
+//                         if (qNEW) {
+//                               products = await Product.find().sort({createdAt: -1}).limit(5)
+//                           }else if (qCategory){
+//                                 products = await Product.find({
+//                                       categories: {
+//                                             $in: [qCategory]
+//                                         }
+//                                     })
+//                                 }else{
+//                                       products = await Product.find()
+//                                   }
+                          
+                          
+//                                 res.status(200).json(products)
+//                               }catch(err){
+//                                   res.status(500).json(err)
+//                                 }
+//                               })
+              
+                            
+                            
+                            
+                            
+                            
+                            
+                            
+                   

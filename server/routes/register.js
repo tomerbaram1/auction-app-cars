@@ -29,6 +29,7 @@ if (userExists) return res.status(400).send("User already exists");
 let user = new User({
     name: req.body.name,
     email: req.body.email,
+    isAdmin: req.body.isAdmin,
     password: req.body.password
 });
 // hash password(so no one could access the info)
@@ -40,6 +41,7 @@ if (user) {
       _id: user.id,
       name: user.name,
       email: user.email,
+      isAdmin: user.isAdmin,
       token: genAUthToken(user._id),
     })
   } else {

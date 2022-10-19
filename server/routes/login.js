@@ -20,11 +20,15 @@ if (!user) return res.status(400).send("Invalid email or password");
 const isValid = await bcrypt.compare(password, user.password)
 if (!isValid) return res.status(400).send("Invalid email or password");
 
+
 res.json({
     _id: user.id,
     name: user.name,
     email: user.email,
+    isAdmin: user.isAdmin,
     token: genAUthToken(user._id),
   })
 })
+
+
 module.exports = router

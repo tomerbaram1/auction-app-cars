@@ -1,19 +1,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap');
 
 * {
+
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  font-family: 'Montserrat', sans-serif;
+
 }
 
-body {
-  font-family: 'Poppins', sans-serif;
-  height: 100vh;
-}
+
 
 a {
   text-decoration: none;
-  color: #000;
+  color: rgb(36, 49, 50);
 }
 
 p {
@@ -33,89 +33,103 @@ h2,
 h3 {
   font-weight: 600;
   margin-bottom: 10px;
+
 }
 
 .container {
   width: 100%;
-  max-width: 960px;
+  max-width: 1000px;
   margin: 0 auto;
   padding: 0 20px;
   text-align: center;
+
 }
 
 .header {
+  position: sticky;
+  color: white;
+  top: 0px;
+  height: 70px;
+  background-color: black;
+  opacity: 0.75;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  border-bottom: 1px solid #e6e6e6;
-  margin-bottom: 60px;
+  padding: 0px 30px 0px 30px;
+  margin-bottom: -70px;
+  z-index: 5;
+}
+.header-menu{
+  color: white;
+  cursor: pointer;
+  display: none;
+}
+.logo{
+  color:white ;
+  font-family: 'MonteCarlo', cursive;
+  font-size: 2.5rem;
 }
 
-.header ul {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+.text-link {
+  color: white;
+  text-decoration: none;
+  font-size: 1.3rem;
+  text-align: center;
+  padding: 10px;
+  margin: 0px 5px;
+  border-style: solid ;
+  border-width: 0px 0px 1px 0px;
+  border-color: transparent;
+  transition: 250ms;
 }
-
-.header ul li {
-  margin-left: 20px;
-}
-
-.header ul li a {
-  display: flex;
-  align-items: center;
-}
-
-.header ul li a:hover {
-  color: #777;
-}
-
-.header ul li a svg {
-  margin-right: 5px;
+.text-link:hover{
+  border-color: white;
+  transition: 250ms;
 }
 
 .heading {
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: 700;
-  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 0 50px;
   padding: 0 20px;
+  margin: 100px;
 }
 
-.heading p {
+.cars-par {
+  font-size: 3rem;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
   color: #828282;
 }
 
 .products {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 60px;
+  justify-content: center;
+  
 }
 
-.product {
-  background-color: #f4f4f4;
-  margin: 10px 0;
-  padding: 20px 0 10px;
-  position: relative;
-}
 
-.goal .close {
-  position: absolute;
-  top: 10px;
-  right: 15px;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
+.form{
+  height: 20%;
+  width: 70%;
+  margin: 0 auto;
+  margin-top: 100px;
 
-.form,
+}
 .content {
   width: 70%;
+
   margin: 0 auto;
 }
 
 .form-group {
   margin-bottom: 10px;
+
 }
 
 .form-group input,
@@ -129,26 +143,91 @@ h3 {
   font-family: inherit;
 }
 
-.form-group label {
-  text-align: left;
+
+
+.product-details {
+  background: #fff;
+  border-radius: 4px;
+  width: 22vw;
+  box-shadow: 2px 2px 5px 5px rgba(0,0,0,0.05);
+  margin: 60px auto;
+
+}
+.products{
+margin-top: 70px;
+
+}
+.product-details h4 {
+  margin: 0 0 10px 0;
+  font-size: 1.5em;
+  color: rgb(0, 0, 0);
+  font-family: fantasy;
+}
+.product-details p {
+  line-height: 2rem;
+  margin: 0;
+  color: #555;
+}
+.product-details strong {
+  font-size: 1.2em;
+  color: rgb(11, 11, 11);
+}
+.product-details span {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  cursor: pointer;
+  background: #f1f1f1;
+  padding: 6px;
+  border-radius: 50%;
+  color: #333;
+}
+
+label, input {
   display: block;
-  margin: 0 0 5px 3px;
+}
+input {
+  padding: 10px;
+  margin-bottom: 20px;
+  width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+div.error {
+  padding: 10px;
+  background: #ffefef;
+  border: 1px solid var(--error);
+  color: var(--error);
+  border-radius: 4px;
+  margin: 20px 0;
 }
 
 .btn {
   padding: 10px 20px;
-  border: 1px solid #000;
+  border: 1px solid rgb(192, 192, 192);
   border-radius: 5px;
-  background: #000;
+  background: #7ae3ef;
   color: #fff;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
   text-align: center;
   appearance: button;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+}
+.bid-btn {
+  padding: 10px 20px;
+  margin: 10px;
+  border: 1px solid rgb(192, 192, 192);
+  border-radius: 5px;
+  background: #e6e6e6;
+  color: black;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+  appearance: button;
 }
 
 .btn svg {
@@ -157,7 +236,7 @@ h3 {
 
 .btn-reverse {
   background: #fff;
-  color: #000;
+  color: #00e5ff;
 }
 
 .btn-block {
@@ -168,6 +247,12 @@ h3 {
 .btn:hover {
   transform: scale(0.98);
 }
+.bid-btn:hover {
+  transform: scale(0.98);
+
+}
+
+
 
 .loadingSpinnerContainer {
   position: fixed;
@@ -190,17 +275,77 @@ h3 {
   border-radius: 50%;
   animation: spin 1.2s linear infinite;
 }
+.select{
+  font-weight: 600;
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+  margin-top: 2%;
+  margin-bottom: 2%;
+  color: black;
+  border: 3px solid transparent;
+  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.2);
+}
+.option{
+  border: 3px solid transparent;
+  transition: 0.3s ease-in-out;
+}
+.car-image{
+  background-repeat: no-repeat;
+  width: 10vw;
+  height: 15vh;
+  background-size: cover;
+  margin-bottom: 10px;
+  margin: 5px;
+}
+ /* landing */
+.landing{
+  position: relative;
+  width: 100% ;
+  height: 100vh;
+}
+.landing-img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+}
+.landing-title{
+  position: absolute;
+  bottom: 15%;
+  right: 10%;
+  color: white;
+  font-size: 4rem;
+  padding: 15px;
+}
 
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
+
+/* phone */
+@media (max-width: 800px) {
+  /* .header{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    position: absolute;
+    top: 70px;
+    left:-100% ;
+    width: 100%;
+    height: 300px;
+    transition: all 0.5s;
+  } */
+  .header--active{
+    left: 0;
   }
-  100% {
-    transform: rotate(360deg);
+  .header-menu{
+    display: block;
   }
 }
 
-@media (max-width: 600px) {
+
+
+
+@media (max-width: 800px) {
   .form {
     width: 90%;
   }

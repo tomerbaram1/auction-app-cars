@@ -56,10 +56,10 @@ if(isLoading){
   return (
     <>
     <section className="heading">
-        <h1>
-            <FaSignInAlt/> Login
-        </h1>
-        <p>Please login</p>
+
+             
+
+        <p><FaSignInAlt/>Login</p>
     </section>
     <section className="form">
         <form onSubmit={onSubmit}>
