@@ -43,6 +43,7 @@ export default function ProductForm() {
       d.getMinutes(),
       d.getSeconds()
     );
+    setBidStart(d.toLocaleString())
     setBidEnd(newBidEnd);
 
     // console.log(newBidEnd);

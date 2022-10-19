@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useProductsContext } from "../hooks/useProductsContext";
 import ProductForm from "./ProductForm";
 import Bid from "./bids/AddBid";
-import Bids from "./bids/Bids";
-import LastBid from "./LastBid";
+import { FaChevronUp } from 'react-icons/fa';
+import { FaChevronDown } from 'react-icons/fa';
 
 import { useSelector } from "react-redux";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -13,6 +13,7 @@ import "swiper/css/pagination";
 import "./swiper.css";
 import { Pagination, Navigation } from "swiper";
 import TimeLeft from "./Timer";
+import DeleteBtnAdmin from "./DeleteBtnAdmin";
 function Product(props) {
   //no need for useState because of the new Hook we created
   const { products, dispatch } = useProductsContext();
@@ -21,26 +22,16 @@ function Product(props) {
   const [admin, setAdmin] = useState("");
   const { user } = useSelector((state) => state.auth);
 
-  const [open, setOpen] = useState(true);
+  const [showMore, setShowMore] = useState(false);
   const toggleOpenInfo = () => {
-    console.log(open);
-    setOpen(!open);
+
   };
 
   const [addBid, setAddBid] = useState({
     bid: "",
   });
 
-  // const isAdminVal = () =>{
-  //   if(user.isAdmin){
-  //     setAdmin(user)
-  //     console.log(user.name);
 
-  //   }
-  //   else{
-  //     console.log(user.isAdmin);;
-  //   }
-  // }
 
   // const calcLastBid = () => {
   //   if(bids.length===0) {
@@ -150,23 +141,19 @@ function Product(props) {
                         </strong>
                         {product.time}{" "}
                       </p>
+                      <DeleteBtnAdmin
+                      id={product._id}
+                      />
                     </>
                   ) : null}
-
-                  <Bid
-                    bidder={product.bidder}
-                    id={product._id}
-                    updatedprice={product.updatedprice}
-                    bid={product.bid}
-                  />
+                  
                 </div>
               ))}
           </div>
         </section>
       ) : (
         <section className="container">
-          <button onClick={toggleOpenInfo}>Show more details</button>
-          {!toggleOpenInfo ? (
+
             <Swiper
               slidesPerView={3}
               spaceBetween={30}
@@ -189,6 +176,31 @@ function Product(props) {
                         <img src={product.image}></img>
                       </div>
                       <p>
+                        <strong>
+                          Current Price:
+                          <br />{" "}
+                        </strong>
+                        {product.updatedprice > 0
+                          ? product.updatedprice + product.startprice
+                          : product.startprice}{" "}
+                        ${" "}
+                      </p>
+                    <div>
+                        <strong>
+                          Auction End:
+                          <br />{" "}
+                        </strong>
+                        <TimeLeft bidEnd={product.bidEnd} />
+                      </div>
+                      <section>
+                    <button className="bid-btn" onClick={() => setShowMore(!showMore)}>
+                    {showMore ? FaChevronUp() : FaChevronDown()}
+                    </button>
+                        {showMore? 
+                        <>
+                        
+
+                        <p>
                         <strong>
                           Car Brand:
                           <br />{" "}
@@ -223,50 +235,34 @@ function Product(props) {
                         </strong>
                         {product.bid} ${" "}
                       </p>
-                      <p>
-                        <strong>
-                          Current Price:
-                          <br />{" "}
-                        </strong>
-                        {product.updatedprice > 0
-                          ? product.updatedprice + product.startprice
-                          : product.startprice}{" "}
-                        ${" "}
-                      </p>
-                      <p>
-                        <strong>
-                          Auction End:
-                          <br />{" "}
-                        </strong>
-                        {product.bidEnd}
-                      </p>
-                      <div>
+                     
+                     
+                      {/* <div>
                         <strong>
                           Auction Start:
                           <br />{" "}
                         </strong>
                         {product.bidStart}
-                      </div>
-                      <div>
-                        <strong>
-                          Auction End:
-                          <br />{" "}
-                        </strong>
-                        <TimeLeft bidEnd={product.bidEnd} />
-                      </div>
+                      </div> */}
+                      
                       <Bid
                         bidder={product.bidder}
                         id={product._id}
                         updatedprice={product.updatedprice}
                         bid={product.bid}
                       />
+                      </>
+
+                      :
+                      ''}
+                        
+                      </section>
+                      
                     </div>
                   </SwiperSlide>
                 ))}
             </Swiper>
-          ) : (
-            <button onClick={toggleOpenInfo}>show less</button>
-          )}
+        
         </section>
       )}
     </>
