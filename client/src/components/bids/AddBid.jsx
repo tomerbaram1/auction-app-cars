@@ -15,10 +15,12 @@ export default function Bid(props) {
   const { user } = useSelector((state) => state.auth);
   const [error, setError] = useState(null);
 
-  // const placeBid = () => {
-  //   let newBid = {bid: bid}
+ 
+  // const toggleNoBids = () => {
+  // if(bid=0 ){
+  //   setBid(null)
+  // }}
 
-  // }
 
   const sendBid = () => {
     console.log("1");
@@ -86,6 +88,8 @@ export default function Bid(props) {
   return (
     <div>
       <div>
+       
+        <>
         <input
           type="number"
           className="bid"
@@ -96,6 +100,8 @@ export default function Bid(props) {
         <button onClick={sendBid} className="bid-btn">
           Place Bid
         </button>
+        </>
+        
       </div>
       <div></div>
     </div>

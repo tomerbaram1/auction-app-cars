@@ -18,7 +18,10 @@ const ProductSchema = new mongoose.Schema({
   bidder: {type: String, ref: 'user',default:"No Bidder Found"},
 
   bid:{type:Number,default:0} ,
-
+  bids:[
+    bid={type:Number,default:0},
+    bidder={type: String, ref: 'user',default:"No Bids yet"},
+  ],
   time:{Date},
 
   bidStart: {

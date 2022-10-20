@@ -11,6 +11,8 @@ const TimeLeft = (props) => {
       dispatch({ type: "SET_PRODUCTS", payload: json });
     }
   };
+
+
   let [timeCounter, setTimeCounter] = useState("");
   setInterval(() => {
     timeleft();

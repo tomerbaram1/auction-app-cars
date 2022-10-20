@@ -9,6 +9,7 @@ const port =  process.env.PORT || 5000;
 const register = require('./routes/register')
 const login = require('./routes/login')
 const products = require('./routes/products')
+const rateLimit= require('express-rate-limit')
 // DB
 mongoose.connect(process.env.DB,{
     useNewUrlParser:true,
@@ -21,11 +22,21 @@ mongoose.connect(process.env.DB,{
 app.use(express.json())
 app.use(morgan("dev"));
 app.use(cors());
+const limiter = rateLimit({
+    max:1000,
+    windowMs: 60 * 60 * 1000,
+    message:"too many requests from this API"
+})
+app.use(limiter)
 
 // body
 app.get("/",(req,res) =>{
     res.send('Welcome to BuyMarket API')
 })
+
+
+// Limit requests from API
+
 
 // routes
 app.use('/api/register',register)

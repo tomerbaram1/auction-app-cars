@@ -6,7 +6,7 @@ const {
     createProduct,
     deleteProduct,
     updateProduct,
-    deleteAllProducts,
+    endBids,
     updateProductBid
 } = require('../controllers/productController')
 
@@ -14,6 +14,8 @@ const router = express.Router()
     
     // GET all 
 router.get('/', getProducts)
+    // GET all 
+router.get('/bids', getProducts)
 
 // GET a single 
 router.get('/:id', getProduct)
@@ -28,6 +30,8 @@ router.delete('/:id', deleteProduct)
 
 // // UPDATE 
 router.patch('/:id', updateProduct)
+// // UPDATE 
+router.patch('/bids', endBids)
 
 
 

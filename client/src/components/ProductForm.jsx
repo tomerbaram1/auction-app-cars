@@ -133,13 +133,19 @@ export default function ProductForm() {
       >
         <option value="">Select End Time</option>
         <option className="option" value={"1"}>
-          1 day
+          1 Day
+        </option>
+        <option className="option" value={"2"}>
+          2 Days
         </option>
         <option className="option" value={"3"}>
-          3 days
+          3 Days
+        </option>
+        <option className="option" value={"4"}>
+          4 Days
         </option>
         <option className="option" value={"5"}>
-          5 days
+          5 Days
         </option>
       </select>
       <div></div>

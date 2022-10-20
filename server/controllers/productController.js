@@ -29,12 +29,12 @@ const getProduct = async (req, res) => {
 
 // create a new product
 const createProduct = async (req, res) => {
-  const {title, bid,bidder,time, bidStart, bidEnd, startprice,updatedprice, brand, catergory, description ,image} = req.body
+  const {title, bid,bidder,bids,time, bidStart, bidEnd, startprice,updatedprice, brand, catergory, description ,image} = req.body
 
   // add to the database
   try {
 
-    const product = await Product.create({ title, bid, bidder, time, bidStart, bidEnd, startprice,updatedprice, brand, catergory, description ,image})
+    const product = await Product.create({ title, bid, bidder,bids, time, bidStart, bidEnd, startprice,updatedprice, brand, catergory, description ,image})
   
     res.status(200).json(product)
   } catch (error) {
@@ -80,6 +80,24 @@ const updateProduct = async (req, res) => {
       res.status(200).json(product)
 }
 
+// disable bidding if the time is over
+
+const endBids = async (req,res) => {
+  const { id,bid,bidEnd } = req.params
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(400).json({error: 'No such product'})
+  }
+  const Nobids = await Product.findOneAndUpdate({_id: id, bid:bid, bidEnd:bidEnd},{
+    ...req.body})
+    if(!Nobids) {
+      return res.status(400).json({error: 'No such product'})
+    }
+    if(bidEnd="The auction ended"){
+      bid=bid
+      res.status(200).json(Nobids,"Bid over")
+    }
+ }
+
 // update bid
 const updateProductBid = async (req, res) => {
   let { bid, updatedprice } = req.body;
@@ -124,5 +142,6 @@ module.exports = {
     deleteProduct,
     updateProduct,
     updateProductBid,
-    deleteAllProducts
+    deleteAllProducts,
+    endBids
 }

@@ -14,6 +14,7 @@ import "./swiper.css";
 import { Pagination, Navigation } from "swiper";
 import TimeLeft from "./Timer";
 import DeleteBtnAdmin from "./DeleteBtnAdmin";
+import { productsReducer } from "../features/products/ProductContext";
 function Product(props) {
   //no need for useState because of the new Hook we created
   const { products, dispatch } = useProductsContext();
@@ -21,15 +22,10 @@ function Product(props) {
   const [bidder, setBidder] = useState("");
   const [admin, setAdmin] = useState("");
   const { user } = useSelector((state) => state.auth);
-
+  const [noBid, setNoBid] = useState(null);
   const [showMore, setShowMore] = useState(false);
-  const toggleOpenInfo = () => {
 
-  };
 
-  const [addBid, setAddBid] = useState({
-    bid: "",
-  });
 
 
 
@@ -52,15 +48,17 @@ function Product(props) {
     fetchProducts();
     // isAdminVal()
   }, [user]);
-
+ 
   return (
     <>
       {user && user.isAdmin ? (
+      
         <section className="content">
           <p className="cars-par">Cars for sell</p>
           <div className="products">
             {products &&
               products.map((product, index) => (
+                
                 <div className="product-details" key={index}>
                   <h4>{product.title}</h4>
                   <div>
@@ -127,6 +125,7 @@ function Product(props) {
                   </div>
                   {user.isAdmin ? (
                     <>
+                    <p><strong>Total bids:</strong>{product.bids}</p>
                       <p>
                         <strong>
                           Last Bidder:
@@ -134,13 +133,7 @@ function Product(props) {
                         </strong>
                         {product.bidder}{" "}
                       </p>
-                      <p>
-                        <strong>
-                          Last Bid Time:
-                          <br />{" "}
-                        </strong>
-                        {product.time}{" "}
-                      </p>
+                     
                       <DeleteBtnAdmin
                       id={product._id}
                       />
@@ -246,6 +239,7 @@ function Product(props) {
                       </div> */}
                       
                       <Bid
+                        
                         bidder={product.bidder}
                         id={product._id}
                         updatedprice={product.updatedprice}
